@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.qsort">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true">
+        <activity android:name=".UxResearcher.UxReportActivity" />
+        <activity android:name=".Participants.PartiReviewActivity" />
+        <activity android:name=".Participants.PartiSortActivity" />
+        <activity android:name=".Participants.PartiWelcomeActivity" />
+        <activity android:name=".UxResearcher.UxShareActivity" />
+        <activity android:name=".UxResearcher.UxProjectSettingsActivity" />
+        <activity android:name=".Participants.PartiMainActivity" />
+        <activity android:name=".UxResearcher.UxMainActivity" />
+        <activity android:name=".UxResearcher.UxLoginActivity" />
+        <activity android:name=".UxResearcher.UxRegisterActivity" />
+        <activity android:name=".WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

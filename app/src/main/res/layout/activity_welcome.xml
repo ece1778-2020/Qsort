@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to QSort!\n\n"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+    <Button
+        android:id="@+id/btnParti"
+        android:layout_marginTop="30dp"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="I am a participant"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnDesigner"
+        android:layout_marginTop="15dp"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="I am a UX designer"
+        android:textAllCaps="false"/>
+
+
+</LinearLayout>

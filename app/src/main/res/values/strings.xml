@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Qsort</string>
+    <string name="add">ADD</string>
+    <string name="category">Category</string>
+    <string name="label">Label</string>
+    <string name="submit">Submit</string>
+    <string name="projectTitle">Project Title</string>
+    <string name="enterTitle">Please enter project title</string>
+    <string name="project_report">Project Report</string>
+    <string name="sharing">Sharing</string>
+    <string name="your_unique_code">Your unique code:</string>
+    <string name="qr_code">QR Code</string>
+    <string name="email">Email</string>
+    <string name="participant_s_email">Participants\' emails, separated by commas:</string>
+    <string name="welcome">Welcome</string>
+    <string name="please_enter_your_unique_code">Please enter your unique code</string>
+    <string name="enter">Enter</string>
+    <string name="project_picture">Project picture</string>
+    <string name="add_picture">Add Picture</string>
+    <string name="back">Back</string>
+
+</resources>
