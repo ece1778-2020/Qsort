@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.qsort.R;
+import com.example.qsort.WelcomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -182,5 +183,10 @@ public class UxRegisterActivity extends AppCompatActivity implements View.OnClic
                         }
                     }
                 });
+    }
+
+    public void backToLogin(View view){
+        startActivity(new Intent(getApplicationContext(), UxLoginActivity.class));
+        finish();
     }
 }
