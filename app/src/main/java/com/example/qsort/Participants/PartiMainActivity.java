@@ -23,8 +23,6 @@ public class PartiMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parti_main);
 
-        labelTextView = findViewById(R.id.partiLabel);
-
         Intent intent = getIntent();
 
         categories = intent.getExtras().getString("Categories");

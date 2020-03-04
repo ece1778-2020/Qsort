@@ -7,15 +7,19 @@
     tools:context=".Participants.PartiMainActivity">
 
 
-    <TextView
-        android:id="@+id/partiLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.viewpager.widget.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.viewpager.widget.ViewPager>
+
 
     <Button
         android:id="@+id/backButtonPartiMain"
@@ -23,8 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="54dp"
+        android:onClick="backToEnterCode"
         android:text="@string/back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="backToEnterCode"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
