@@ -83,7 +83,6 @@ public class PartiWelcomeActivity extends AppCompatActivity {
                         }
                     }
                 });
-
     }
     public void backToWelcome(View view){
         startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
