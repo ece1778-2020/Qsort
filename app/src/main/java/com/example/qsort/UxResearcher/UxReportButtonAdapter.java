@@ -53,33 +53,6 @@ public class UxReportButtonAdapter extends RecyclerView.Adapter<UxReportButtonAd
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         holder.labelButton.setText(labelList.get(position));
         clicked = true;
-//        holder.labelButton.setBackgroundColor(Color.GRAY);
-
-//        holder.labelButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                holder.labelButton.setBackgroundColor(Color.GRAY);
-//                view.setBackgroundColor(Color.GREEN);
-//            }
-//        });
-
-//        holder.linearlayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                index = position;
-//                notifyDataSetChanged();
-//            }
-//        });
-//        if(index==position){
-////            holder.linearlayout.setBackgroundColor(Color.parseColor("#FFEB3B"));
-//            holder.labelButton.setBackgroundColor(Color.parseColor("#ffffff"));
-//        }
-//        else
-//        {
-////            holder.linearlayout.setBackgroundColor(Color.parseColor("#ffffff"));
-//            holder.labelButton.setBackgroundColor(Color.GRAY);
-//        }
-
     }
 
     @Override

@@ -8,15 +8,20 @@
     <string name="enterTitle">Please enter project title</string>
     <string name="project_report">Project Report</string>
     <string name="sharing">Sharing</string>
-    <string name="your_unique_code">Your unique code:</string>
+    <string name="your_unique_code">Project unique code:</string>
     <string name="qr_code">QR Code</string>
     <string name="email">Email</string>
-    <string name="participant_s_email">Participants\' emails, separated by commas:</string>
+    <string name="participant_s_email">Participants\' emails:</string>
     <string name="welcome">Welcome</string>
     <string name="please_enter_your_unique_code">Please enter your unique code</string>
     <string name="enter">Enter</string>
     <string name="project_picture">Project picture</string>
     <string name="add_picture">Add Picture</string>
     <string name="back">Back</string>
+    <string name="result">Result</string>
+    <string name="comment">Comment</string>
+    <string name="textview">TextView</string>
+    <string name="card_sorting">Card Sorting</string>
+    <string name="review">Review</string>
 
 </resources>

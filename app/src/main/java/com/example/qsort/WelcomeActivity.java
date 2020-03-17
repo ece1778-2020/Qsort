@@ -6,14 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.qsort.Participants.PartiWelcomeActivity;
 import com.example.qsort.UxResearcher.UxLoginActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private Button btnParticipant;
-    private Button btnDesigner;
+    private LinearLayout btnParticipant;
+    private LinearLayout btnDesigner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

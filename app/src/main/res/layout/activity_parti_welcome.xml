@@ -6,53 +6,82 @@
     android:layout_height="match_parent"
     tools:context=".Participants.PartiWelcomeActivity">
 
-
     <EditText
         android:id="@+id/enterCodeEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:layout_marginEnd="54dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/lato"
         android:hint="@string/please_enter_your_unique_code"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/enterProjectButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/openQR" />
 
     <TextView
         android:id="@+id/welcomeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
+        android:fontFamily="@font/lato_bold"
         android:text="@string/welcome"
+        android:textColor="@color/colorBlack"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/enterProjectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:onClick="enterProject"
         android:text="@string/enter"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterCodeEditText"
-        android:onClick="enterProject"
-        android:textAllCaps="false"/>
+        app:layout_constraintTop_toBottomOf="@+id/enterCodeEditText" />
+
     <Button
-        android:id="@+id/backButtonPartiMain"
+        android:id="@+id/scanQR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="54dp"
-        android:text="@string/back"
+        android:layout_marginTop="36dp"
+        android:text="Scan QR code"
+        android:textAllCaps="false"
+        android:onClick="scanQR"
+        app:layout_constraintBottom_toTopOf="@+id/openQR"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="backToWelcome"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcomeLabel" />
+
+    <Button
+        android:id="@+id/openQR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detect a QR code from gallery"
+        android:textAllCaps="false"
+        android:onClick="openQR"
+        app:layout_constraintBottom_toTopOf="@+id/enterCodeEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scanQR" />
+    <!--    <Button-->
+    <!--        android:id="@+id/backButtonPartiMain"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="30dp"-->
+    <!--        android:layout_marginEnd="54dp"-->
+    <!--        android:text="@string/back"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        android:onClick="backToWelcome"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

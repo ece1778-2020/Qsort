@@ -8,52 +8,57 @@
     android:gravity="center"
     >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="200dp">
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginLeft="200dp">-->
 
-        <Button
-            android:id="@+id/backButtonLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/back"
-            android:onClick="backToWelcome"/>
-    </RelativeLayout>
+<!--        <Button-->
+<!--            android:id="@+id/backButtonLogin"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/back"-->
+<!--            android:onClick="backToWelcome"/>-->
+<!--    </RelativeLayout>-->
 
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to QSort"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/lato_bold"
+        android:gravity="center"
+        android:text="Welcome to QSort"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/useremail"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
-        android:gravity="center"/>
+        android:textSize="18sp"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
         android:hint="Password"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
-        android:gravity="center"/>
+        android:textSize="18sp"/>
 
     <Button
         android:id="@+id/login"
@@ -68,10 +73,11 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="or"
         android:layout_marginTop="10dp"
-        android:textSize="15sp"
-        android:gravity="center"/>
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        android:text="or"
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/register"
@@ -80,18 +86,16 @@
         android:text="Sign up"
         android:layout_marginTop="10dp"
         android:textAllCaps="false"
-        android:gravity="center"
-        android:layout_marginBottom="120dp"/>
+        android:gravity="center" />
 
     <ProgressBar
         android:id="@+id/loading"
-        android:layout_width="93dp"
-        android:layout_height="67dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:textAllCaps="false"
         android:visibility="gone" />
-
 
 </LinearLayout>

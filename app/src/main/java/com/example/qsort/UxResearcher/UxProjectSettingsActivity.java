@@ -1,9 +1,12 @@
 package com.example.qsort.UxResearcher;
 
+import androidmads.library.qrgenearator.QRGContents;
+import androidmads.library.qrgenearator.QRGEncoder;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,39 +14,47 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.qsort.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.zxing.WriterException;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Boolean.TRUE;
+
 public class UxProjectSettingsActivity extends AppCompatActivity {
 
+    private static final String TAG = "UxProjectSettingActivity";
     String categories, labels;
     EditText categoriesTextView,labelsTextView,projectTitleTextView;
     ImageView projectPicture;
     String timestamp;
     Uri pictureUri;
-    Button submitButton;
-    ProgressBar progressBar;
+    ProgressBar progresBar;
     private Boolean FLAG = true;
+    String categoriesFinal,labelsFinal,projectTitleFinal;
 
 
     String uid;
@@ -64,11 +75,11 @@ public class UxProjectSettingsActivity extends AppCompatActivity {
         labelsTextView = findViewById(R.id.labelTextView);
         projectTitleTextView = findViewById(R.id.projectTitleTextView);
         projectPicture = findViewById(R.id.projectPicture);
-        progressBar = findViewById(R.id.progressBarProject);
-        submitButton = findViewById(R.id.submitButton);
+        progresBar = findViewById(R.id.progressBarProject);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        progressBar.setVisibility(View.INVISIBLE);
+
+        progresBar.setVisibility(View.INVISIBLE);
 
         Intent intent = getIntent();
 
@@ -85,32 +96,27 @@ public class UxProjectSettingsActivity extends AppCompatActivity {
 
     public void submitProject(View view){
 
+        progresBar.setVisibility(View.VISIBLE);
 
         if(FLAG == true){
+            progresBar.setVisibility(View.INVISIBLE);
             Toast.makeText(this, "Please choose a project photo.", Toast.LENGTH_SHORT).show();
             return;
         }
         else{
-
-
-            final String categories = categoriesTextView.getText().toString();
-            final String labels = labelsTextView.getText().toString();
-            final String projectTitle = projectTitleTextView.getText().toString();
+             final String categories = categoriesTextView.getText().toString();
+             final String labels = labelsTextView.getText().toString();
+             final String projectTitle = projectTitleTextView.getText().toString();
 
             if(TextUtils.isEmpty(categories) | TextUtils.isEmpty(labels) | TextUtils.isEmpty(projectTitle)){
+                progresBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(this, "Please fill all the blanks.", Toast.LENGTH_SHORT).show();
                 return;
             }
             else{
-
-                progressBar.setVisibility(View.VISIBLE);
-
                 categoriesTextView.setEnabled(false);
                 labelsTextView.setEnabled(false);
                 projectTitleTextView.setEnabled(false);
-                submitButton.setEnabled(false);
-                projectPicture.setEnabled(false);
-
 
                 String[] categoriesArray = categories.split("\n");
                 String[] labelsArray = labels.split("\n");
@@ -120,70 +126,46 @@ public class UxProjectSettingsActivity extends AppCompatActivity {
                 categoriesMap.put("value",0);
 
                 showMessage("Submitting project..");
-                for (int i=0; i<labelsArray.length ;i++){
 
-                    if(labelsArray[i].equals("")){
+                for (int i=0; i<labelsArray.length;i++){
+                    Map<String, String> labelsMap = new HashMap<>();
+                    labelsMap.put("id",labelsArray[i]);
+                    firebaseFirestore.collection("projects").document(uid+"_"+timestamp)
+                            .collection("labels").document(labelsArray[i]).set(labelsMap);
 
-                    }
-                    else{
-                        Map<String, String> labelsMap = new HashMap<>();
-                        labelsMap.put("id",labelsArray[i]);
+                    for (int j=0; j<categoriesArray.length;j++){
+//                label.put(categoriesArray[j],0);
+
                         firebaseFirestore.collection("projects").document(uid+"_"+timestamp)
-                                .collection("labels").document(labelsArray[i]).set(labelsMap);
-
-
-                        for (int j=0; j<categoriesArray.length;j++) {
-                            if(categoriesArray[j].equals("")){
-
-                            }
-                            else{
-                                firebaseFirestore.collection("projects").document(uid + "_" + timestamp)
-                                        .collection("labels").document(labelsArray[i])
-                                        .collection("categories").document(categoriesArray[j]).set(categoriesMap);
-                            }
-
-                        }
+                                .collection("labels").document(labelsArray[i])
+                                .collection("categories").document(categoriesArray[j]).set(categoriesMap);
 
                     }
-
-
-
                 }
 
-                storageReference = FirebaseStorage.getInstance().getReference().child("project pictures");
-                final StorageReference imageFilePath = storageReference.child(pictureUri.getLastPathSegment());
+                if(pictureUri == null){
+                    storeProject(projectTitle,"", labels,categories);
+                }
+                else{
+                    storageReference = FirebaseStorage.getInstance().getReference().child("project pictures");
+                    final StorageReference imageFilePath = storageReference.child(pictureUri.getLastPathSegment());
 
-                imageFilePath.putFile(pictureUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                storeProject(projectTitle, uri.toString());
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                showMessage(e.toString());
-                                categoriesTextView.setEnabled(true);
-                                labelsTextView.setEnabled(true);
-                                projectTitleTextView.setEnabled(true);
-                                submitButton.setEnabled(true);
-                                projectPicture.setEnabled(true);
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        showMessage(e.toString());
-                        categoriesTextView.setEnabled(true);
-                        labelsTextView.setEnabled(true);
-                        projectTitleTextView.setEnabled(true);
-                        submitButton.setEnabled(true);
-                        projectPicture.setEnabled(true);
-                    }
-                });
+                    imageFilePath.putFile(pictureUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    storeProject(projectTitle, uri.toString(), labels,categories);
+                                }
+                            });
+                        }
+                    });
+                }
+
+
+
+
 
             }
         }
@@ -260,7 +242,7 @@ public class UxProjectSettingsActivity extends AppCompatActivity {
     }
 
 
-    public void storeProject(String projectTitle, String uri){
+    public void storeProject(String projectTitle, String uri, String labels, String categories){
         Map project = new HashMap<>();
         project.put("Project Name",projectTitle);
         project.put("Project ID",uid+"_"+timestamp);
@@ -268,10 +250,9 @@ public class UxProjectSettingsActivity extends AppCompatActivity {
         project.put("Designer",uid);
         project.put("timestamp",timestamp);
         project.put("Project Picture",uri);
-        project.put("Labels",categories);
-        project.put("Categories",labels);
-
-
+        project.put("Labels",labels);
+        project.put("Categories",categories);
+        project.put("Availability", true);
 
         firebaseFirestore.collection("projects").document(uid+"_"+timestamp).set(project)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -281,11 +262,57 @@ public class UxProjectSettingsActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(),UxShareActivity.class);
 
                         intent.putExtra("Project ID",uid+"_"+timestamp);
-                        intent.putExtra("timestamp",timestamp);
                         // start the activity
                         startActivity(intent);
                     }
                 });
+
+        generateQR();
+    }
+
+    @SuppressLint("LongLogTag")
+    private void generateQR() {
+        QRGEncoder qrgEncoder = new QRGEncoder(uid+"_"+timestamp, null, QRGContents.Type.TEXT, 150);
+        try {
+            // Getting QR-Code as Bitmap
+            Bitmap bitmap = qrgEncoder.encodeAsBitmap();
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+
+            String uid = FirebaseAuth.getInstance().getUid();
+            final StorageReference reference = FirebaseStorage.getInstance().getReference().child("QR_code").child(uid+"_"+timestamp+".jpeg");
+
+            reference.putBytes(byteArrayOutputStream.toByteArray()).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    getDownloadUrl(reference);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.e(TAG, "OnFailure: ", e.getCause());
+                }
+            });
+
+        } catch (WriterException e) {
+            Log.v(TAG, e.toString());
+        }
+
+    }
+
+    private void getDownloadUrl(StorageReference reference){
+        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onSuccess(Uri uri) {
+                Log.d(TAG, "onSuccess: "+uri);
+
+                firebaseFirestore.collection("projects").document(uid+"_"+timestamp)
+                        .update("QRcodeRef",uri.toString());
+
+            }
+        });
     }
 
     private void showMessage(String message) {
@@ -293,11 +320,5 @@ public class UxProjectSettingsActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
 
     }
-
-    public void backToMain(View view){
-        startActivity(new Intent(getApplicationContext(),UxMainActivity.class));
-        finish();
-    }
-
 
 }

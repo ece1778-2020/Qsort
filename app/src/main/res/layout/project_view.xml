@@ -13,7 +13,8 @@
         android:layout_marginRight="10dp"
         android:text="projectName"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="19sp" />
+        android:textSize="18sp"
+        android:fontFamily="@font/lato"/>
 
     <ImageView
         android:id="@+id/projectImageView"

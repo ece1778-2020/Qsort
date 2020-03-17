@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -17,22 +18,29 @@
         android:theme="@style/AppTheme"
         android:requestLegacyExternalStorage="true">
         <activity android:name=".UxResearcher.UxReportActivity" />
-        <activity android:name=".Participants.PartiReviewActivity" />
-        <activity android:name=".Participants.PartiSortActivity" />
+        <activity android:name=".Participants.PartiMainActivity" />
         <activity android:name=".Participants.PartiWelcomeActivity" />
+        <activity android:name=".Participants.CommentActivity" />
         <activity android:name=".UxResearcher.UxShareActivity" />
         <activity android:name=".UxResearcher.UxProjectSettingsActivity" />
-        <activity android:name=".Participants.PartiMainActivity" />
+        <activity android:name=".Participants.PartiReviewActivity" >
+        </activity>
         <activity android:name=".UxResearcher.UxMainActivity" />
         <activity android:name=".UxResearcher.UxLoginActivity" />
         <activity android:name=".UxResearcher.UxRegisterActivity" />
         <activity android:name=".WelcomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+          <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
+        <activity android:name=".UxResearcher.UxViewCommentsActivity" />
+        <activity android:name=".Participants.ScanQRActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

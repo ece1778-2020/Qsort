@@ -7,8 +7,9 @@ public class Project {
     String projectName, projectId,pictureUri, designerUid, timestamp;
     int noParticipants;
     String categories, labels;
+    Boolean availability;
 
-    public Project(String projectName, String projectId, String designerUid, String timestamp, int noParticipants,String pictureUri, String categories, String labels){
+    public Project(String projectName, String projectId, String designerUid, String timestamp, int noParticipants,String pictureUri, String categories, String labels, Boolean availability){
         this.projectName = projectName;
         this.projectId = projectId;
         this.designerUid = designerUid;
@@ -16,14 +17,16 @@ public class Project {
         this.noParticipants = noParticipants;
         this.pictureUri = pictureUri;
         this.categories = categories;
-        this.labels = categories;
+        this.labels = labels;
+        this.availability = availability;
 
     }
 
-    public Project(String projectName, String pictureUri, String projectId){
+    public Project(String projectName, String pictureUri, String projectId, Boolean availability){
         this.projectName = projectName;
         this.pictureUri = pictureUri;
         this.projectId = projectId;
+        this.availability = availability;
     }
 
     public String getProjectName() {
@@ -57,5 +60,7 @@ public class Project {
     public String getDesignerUid() {
         return designerUid;
     }
+
+    public Boolean getAvailability(){ return availability; }
 }
 

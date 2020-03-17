@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+    <TextView
+        android:id="@+id/labelToSort"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/label"
+        android:fontFamily="@font/lato"
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack"/>
+
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/commentLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:clickable="true"
+        >
+
+<!--        <TextView-->
+<!--            android:id="@+id/commentLabel"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/comment"-->
+<!--            android:fontFamily="@font/lato"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textColor="@color/colorBlack"/>-->
+
+        <ImageView
+            android:id="@+id/commentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_comment" />
+
+    </LinearLayout>
+
+</LinearLayout>
