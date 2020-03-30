@@ -9,10 +9,11 @@
         android:id="@+id/labelReportButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label"
         android:background="@drawable/button_effect"
         android:onClick="displayRank"
+        android:text="@string/label"
         android:textAllCaps="false"
+        android:fontFamily="@font/lato"
 
         />
 </LinearLayout>

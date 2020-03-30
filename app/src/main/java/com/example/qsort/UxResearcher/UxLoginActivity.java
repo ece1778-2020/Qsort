@@ -97,7 +97,14 @@ public class UxLoginActivity extends AppCompatActivity {
         }
     }
 
-    public void backToWelcome(View view){
+//    public void backToWelcome(View view){
+//        startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
+//        finish();
+//    }
+
+    @Override
+    public void onBackPressed()
+    {
         startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
         finish();
     }

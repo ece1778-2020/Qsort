@@ -16,6 +16,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.qsort.Project;
 import com.example.qsort.R;
+import com.example.qsort.WelcomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,14 +59,16 @@ public class UxMainActivity<map> extends AppCompatActivity {
     private TextView username;
     private TextView bio;
 //    private Button btnLogout;
-    private Button btnGuide;
+    private LinearLayout btnGuide;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private String userId;
     private String project_name;
     private String project_image;
     private String project_id;
+    private Boolean project_availability;
     ArrayList<Project> projectList;
+
 
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -97,7 +102,7 @@ public class UxMainActivity<map> extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         bio = findViewById(R.id.bio);
-        btnGuide = findViewById(R.id.guideButton);
+        btnGuide = findViewById(R.id.guideLinearLayout);
         projectList  = new ArrayList<>();
 
         DocumentReference documentReference = db.collection("Users").document(userId);
@@ -133,7 +138,8 @@ public class UxMainActivity<map> extends AppCompatActivity {
                                 project_name = document.getData().get("Project Name").toString();
                                 project_image = document.getData().get("Project Picture").toString();
                                 project_id = document.getData().get("Project ID").toString();
-                                Project currentProject = new Project(project_name, project_image, project_id);
+                                project_availability = document.getBoolean("Availability");
+                                Project currentProject = new Project(project_name, project_image, project_id, project_availability);
                                 projectList.add(currentProject);
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }
@@ -218,11 +224,14 @@ public class UxMainActivity<map> extends AppCompatActivity {
             intent.putExtra("Labels",labels.toString());
             // start the activity
             startActivity(intent);
-
-
         }
     }
 
-
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
+    }
 
 }

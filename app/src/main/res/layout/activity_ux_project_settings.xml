@@ -10,36 +10,41 @@
         android:id="@+id/projectTitleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
+        android:fontFamily="@font/lato_bold"
         android:text="@string/projectTitle"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorBlack"/>
 
     <TextView
         android:id="@+id/labelLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/lato_bold"
         android:text="@string/label"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/categoryTextView"
+        android:textColor="@color/colorBlack"/>
 
     <EditText
         android:id="@+id/labelTextView"
         android:layout_width="0dp"
         android:layout_height="120dp"
-        android:layout_marginStart="54dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="54dp"
+        android:layout_marginEnd="30dp"
         android:ems="10"
+        android:fontFamily="@font/lato"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:text="@string/label"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,14 +54,14 @@
         android:id="@+id/categoryTextView"
         android:layout_width="0dp"
         android:layout_height="120dp"
-        android:layout_marginStart="54dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="54dp"
+        android:layout_marginEnd="30dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:text="@string/category"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,50 +72,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:backgroundTint="#16661A"
         android:onClick="submitProject"
         android:text="@string/submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelTextView"
-        android:textAllCaps="false"/>
+        app:layout_constraintTop_toBottomOf="@+id/labelTextView" />
 
     <EditText
         android:id="@+id/projectTitleTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="54dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/lato"
         android:hint="@string/enterTitle"
-        android:textSize="14sp"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/projectTitleLabel"
-        android:singleLine="true"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/projectTitleLabel" />
 
     <TextView
         android:id="@+id/pictureLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/lato_bold"
         android:text="@string/project_picture"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/projectTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/projectTitleTextView"
+        android:textColor="@color/colorBlack"/>
 
     <TextView
         android:id="@+id/categoryLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/lato_bold"
         android:text="@string/category"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/projectPicture" />
+        app:layout_constraintTop_toBottomOf="@+id/projectPicture"
+        android:textColor="@color/colorBlack"/>
 
     <ImageView
         android:id="@+id/projectPicture"
@@ -129,23 +139,11 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/categoryTextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/categoryTextView"
-        app:layout_constraintTop_toBottomOf="@+id/submitButton"
-        android:textAllCaps="false"/>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="54dp"
-        android:text="@string/back"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:onClick="backToMain"/>
+        android:visibility="invisible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

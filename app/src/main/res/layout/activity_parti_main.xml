@@ -6,29 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".Participants.PartiMainActivity">
 
-
-    <androidx.viewpager.widget.ViewPager
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </androidx.viewpager.widget.ViewPager>
-
-
-    <Button
-        android:id="@+id/backButtonPartiMain"
+    <TextView
+        android:id="@+id/cardSortingLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/card_sorting"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorBlack"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sortRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="54dp"
-        android:onClick="backToEnterCode"
-        android:text="@string/back"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/reviewSortButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardSortingLabel" />
+
+    <Button
+        android:id="@+id/reviewSortButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/review"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:backgroundTint="#16661A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAllCaps="false"/>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
