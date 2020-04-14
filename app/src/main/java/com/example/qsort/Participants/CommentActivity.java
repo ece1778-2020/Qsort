@@ -378,7 +378,7 @@ public class CommentActivity extends AppCompatActivity {
         btnVoiceStop.setEnabled(false);
 
         Toast.makeText(CommentActivity.this, "Submitting the comment..",
-                Toast.LENGTH_LONG).show();
+                LENGTH_SHORT).show();
 
         if(!TextUtils.isEmpty(commentText)){
             uploadTextComment(commentText);

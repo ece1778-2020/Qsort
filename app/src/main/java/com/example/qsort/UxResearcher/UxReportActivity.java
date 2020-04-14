@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -29,6 +31,7 @@ import java.util.Map;
 
 import com.bumptech.glide.Glide;
 import com.example.qsort.R;
+import com.example.qsort.TextComment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -75,7 +78,7 @@ public class UxReportActivity extends AppCompatActivity {
     Map<String, String> map;
     StringBuilder temp_result;
     String max_category;
-    int count;
+    int count, count_comments;
     int number_of_categories;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,11 +213,12 @@ public class UxReportActivity extends AppCompatActivity {
 
     public void displayRank(View view){
 
+
         viewCommentsButton.setVisibility(View.VISIBLE);
         viewCommentsButton.setEnabled(true);
         final Button labelButton = (Button)view;
         final String labelButtonText = labelButton.getText().toString();
-
+        showCommentNumber(labelButtonText);
         db.collection("projects").document(project_id)
                 .collection("labels").document(labelButtonText)
                 .collection("categories")
@@ -325,6 +329,7 @@ public class UxReportActivity extends AppCompatActivity {
                                                 if(task.isSuccessful()){
                                                     number_of_categories = task.getResult().size();
                                                     for (QueryDocumentSnapshot document : task.getResult()){
+
                                                         if(number_of_categories==1){
                                                             category_result.add(document.getId());
                                                             label_result.add(label);
@@ -332,8 +337,6 @@ public class UxReportActivity extends AppCompatActivity {
                                                             category_result.add(document.getId());
                                                             label_result.add(label+"*");
                                                         }
-
-
                                                     }
 
                                                 }
@@ -353,13 +356,47 @@ public class UxReportActivity extends AppCompatActivity {
                         }
                     });
 
-
-
-
-
         }
+        category_result.clear();
+        label_result.clear();
+    }
+
+    public void showCommentNumber(final String labelButtonText){
+        count_comments = 0;
+        db.collection("projects").document(project_id).collection("labels")
+                .document(labelButtonText).collection("text_comments")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            count_comments = count_comments+task.getResult().size();
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                        db.collection("projects").document(project_id).collection("labels")
+                                .document(labelButtonText).collection("voice_comments")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            count_comments = count_comments+ task.getResult().size();
+                                            viewCommentsButton.setText("View Comments ("+count_comments+")");
+                                        } else {
+                                            Log.d(TAG, "Error getting documents: ", task.getException());
+                                        }
+                                    }
+                                });
+                    }
+                });
+
+
 
 
     }
+
+
 
 }

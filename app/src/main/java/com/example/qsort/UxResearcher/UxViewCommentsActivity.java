@@ -160,11 +160,6 @@ public class UxViewCommentsActivity extends AppCompatActivity {
                 });
     }
 
-    // don't know the content, to make it simple, jump to main
-//    public void backToMain(View view){
-//        finish();
-//    }
-
     @Override
     public void onBackPressed()
     {

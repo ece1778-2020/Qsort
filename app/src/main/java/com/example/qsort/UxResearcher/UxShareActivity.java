@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -194,15 +195,20 @@ public class UxShareActivity extends AppCompatActivity {
         String emailList = emailTextView.getText().toString();
         String[] email = emailList.split(",");
 
+        String link_val = QRstr;
+        String body = "<a href=\"" + link_val + "\">" + QRstr + "</a>";
+
+
         String subject = "Your Qsort Invitation";
-        String message = "Hello participant,\nYour unique code is "+projectID+"\nHave a nice day!";
+        String message = "Hello participant,\n\nYour unique code is "+projectID+"\n\nThis is a link to the QR code: \n"+Html.fromHtml(body)+"\n\nHave a nice day!";
 
         Intent intent  = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(intent.EXTRA_EMAIL,email);
-        intent.putExtra(intent.EXTRA_SUBJECT,subject);
-        intent.putExtra(intent.EXTRA_TEXT,message);
+        intent.setType("text/html");
+        intent.putExtra(Intent.EXTRA_EMAIL,email);
+        intent.putExtra(Intent.EXTRA_SUBJECT,subject);
+        intent.putExtra(android.content.Intent.EXTRA_TEXT,message);
 
-        intent.setType("message/rfc822");
+//        intent.setType("message/rfc822");
         startActivity(intent);
         emailTextView.setText("");
     }

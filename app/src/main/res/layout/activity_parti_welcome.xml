@@ -6,19 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".Participants.PartiWelcomeActivity">
 
+
     <EditText
         android:id="@+id/enterCodeEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/lato"
         android:hint="@string/please_enter_your_unique_code"
-        app:layout_constraintBottom_toTopOf="@+id/enterProjectButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openQR" />
+        app:layout_constraintTop_toBottomOf="@+id/uniqueCodeLabel" />
 
     <TextView
         android:id="@+id/welcomeLabel"
@@ -35,59 +36,90 @@
 
     <Button
         android:id="@+id/enterProjectButton"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="#16661A"
         android:onClick="enterProject"
         android:text="@string/enter"
         android:textAllCaps="false"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:backgroundTint="#16661A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterCodeEditText" />
 
-    <Button
-        android:id="@+id/scanQR"
+    <TextView
+        android:id="@+id/qrLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Scan QR code"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:backgroundTint="#16661A"
-        android:textAllCaps="false"
-        android:onClick="scanQR"
-        app:layout_constraintBottom_toTopOf="@+id/openQR"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        android:text="QR code:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcomeLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/welcomeLabel" />
 
-    <Button
-        android:id="@+id/openQR"
+    <TextView
+        android:id="@+id/uniqueCodeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Detect a QR code from gallery"
-        android:textAllCaps="false"
-        android:onClick="openQR"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:backgroundTint="#16661A"
-        app:layout_constraintBottom_toTopOf="@+id/enterCodeEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        android:text="Unique code:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scanQR" />
+
+
     <!--    <Button-->
-    <!--        android:id="@+id/backButtonPartiMain"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="30dp"-->
-    <!--        android:layout_marginEnd="54dp"-->
-    <!--        android:text="@string/back"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        android:onClick="backToWelcome"/>-->
+<!--        android:id="@+id/openQR"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Detect a QR code from gallery"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:onClick="openQR"-->
+<!--        style="@style/Widget.AppCompat.Button.Colored"-->
+<!--        android:backgroundTint="#16661A"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/enterCodeEditText"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/scanQR" />-->
+
+    <Button
+        android:id="@+id/scanQR"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#16661A"
+        android:onClick="qrcode"
+        android:text="QR code"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qrLabel" />
+
+    <ImageView
+        android:id="@+id/guideButtonParti"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+        android:onClick="guide"
+        android:src="@drawable/ic_information"
+        android:text="Need some guide on how to start?"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

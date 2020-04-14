@@ -1,9 +1,11 @@
 package com.example.qsort.Participants;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.qsort.R;
+import com.example.qsort.UxResearcher.UxMainActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -100,5 +103,7 @@ public class PartiMainActivity extends AppCompatActivity {
 
         return listString;
     }
+
+
 
 }

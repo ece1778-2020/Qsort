@@ -2,6 +2,7 @@ package com.example.qsort.Participants;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -28,6 +29,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.qsort.R;
+import com.example.qsort.UxResearcher.UxProjectSettingsActivity;
 import com.example.qsort.WelcomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -56,6 +58,12 @@ public class PartiWelcomeActivity extends AppCompatActivity {
     String categories, labels;
     Boolean project_availability;
     String project_name;
+    String guideStr = "Hello participant!" +
+            "\nYou are invited to be part of a card sorting project." +
+            "\nYou can enter your project through unique id or QR code provided by UX researchers." +
+            "\nYou can sort one label to one category." +
+            "\nYou can also leave text and voice comments on each label." +
+            "\nYour feedback will be anonymous.";
 
     FirebaseFirestore firebaseFirestore;
     Uri pictureUri;
@@ -95,7 +103,7 @@ public class PartiWelcomeActivity extends AppCompatActivity {
 
     }
 
-    public void scanQR(View view) {
+    public void scanQR() {
         startActivity(new Intent(getApplicationContext(), ScanQRActivity.class));
         finish();
     }
@@ -160,7 +168,7 @@ public class PartiWelcomeActivity extends AppCompatActivity {
         // [END run_detector]
     }
 
-    public void openQR(View view) {
+    public void openQR() {
         Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent,GALLERY_CODE);
@@ -349,6 +357,43 @@ public class PartiWelcomeActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void guide(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(PartiWelcomeActivity.this);
+        builder.setTitle("Guide on how to use this app")
+                .setMessage(guideStr)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        closeContextMenu();
+                        closeOptionsMenu();
+                    }
+                });
+        builder.create().show();
+
+    }
+
+    public void qrcode(View view){
+
+        final String[] items = {"Scan","Gallery"};
+        AlertDialog.Builder listDialog =
+                new AlertDialog.Builder(PartiWelcomeActivity.this);
+        listDialog.setTitle("Choose:");
+        listDialog.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                switch(which){
+                    case 0:
+                        scanQR();
+                        break;
+                    case 1:
+                        openQR();
+                        break;
+                }
+            }
+        });
+        listDialog.show();
     }
 
 }

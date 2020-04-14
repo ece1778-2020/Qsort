@@ -243,6 +243,7 @@ tools:context=".UxResearcher.UxReportActivity">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="viewComments"
+                android:textAllCaps="false"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:backgroundTint="#16661A"
                 android:text="View Comments" />
